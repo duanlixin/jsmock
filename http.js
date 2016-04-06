@@ -2,35 +2,39 @@
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-01 11:48:58
+ * @Last Modified time: 2016-04-06 14:25:08
  */
 
 'use strict';
 var http = require('http');
-var mock = require('./mock');
-var config = require('./config');
 var url = require('url');
-// console.log(config['/html/ccc'])
-// console.log(require(config['/html/ccc']))
+// 引入mock.js文件
+var mock = require('./mock');
+// 引入配置文件
+var config = require('./config');
+// 监听端口号
+var port = 8888;
+
 var server = http.createServer(function(req, res) {
+    // 设置返回头
     res.writeHeader(200,{
         'Content-Type' : 'text/plain;charset=utf-8'  // 添加charset=utf-8
     }) ;
-    // 从url参数中取出匹配地址
+    // 从url参数中取出匹配地址，也就是配置文件的key值
     var key = url.parse(req.url).pathname;
     // 从url参数中取出callback的function的名字
     var callback = url.parse(req.url, true).query.callback;
+    // 返回的mock数据
     var templateData = {}
     if( key != '/favicon.ico') {
-        templateData = require(config[key]);
-        // console.log(templateData);
-        console.log(callback)
+        // 在配置文件中取出mock模板数据，并生成mock数据
+        templateData = mock.mock(require(config[key]));
+        // 返回mock数据
         res.write(callback +'(' + JSON.stringify(templateData) + ')');
         res.end();
     }
-    // console.log(templateData)
-    // console.log(arg.bb); //返回002
 });
-server.listen(8888);
-// console.log(mock)
-console.log("http server running on port 8888 ...");
+
+server.listen(port);
+
+console.log('http server running on port ' + port + ' ...');

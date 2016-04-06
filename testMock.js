@@ -2,7 +2,7 @@
 * @Author: lixinduan
 * @Date:   2016-04-05 16:13:12
 * @Last Modified by:   lixinduan
-* @Last Modified time: 2016-04-05 17:57:00
+* @Last Modified time: 2016-04-05 20:49:55
 */
 
 'use strict';
@@ -48,7 +48,13 @@ var templateData = {
     // 执行函数 function(){}，取其返回值作为最终的属性值，上下文为
     'name13|': function (argument) {
         return 'sss';
-    }
+    },
+     name: {
+         first: '@navy',
+         middle: '@ctitle',
+         last: '@LAST',
+         full: '@first @middle @last'
+     }
 };
 
 module.exports = templateData;

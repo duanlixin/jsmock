@@ -2,14 +2,14 @@
  * @Author: lixinduan
  * @Date:   2016-03-31 20:38:16
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-03-31 21:15:42
+ * @Last Modified time: 2016-04-05 14:39:49
  */
 
 'use strict';
 var template = [
     0, {
         teamInfo: {
-            leftId: "25",
+            leftId: "211111115",
             leftName: "雷霆",
             leftBadge: "http://mat1.gtimg.com/sports/nba/logo/1602/25.png",
             leftGoal: "119",
@@ -28,9 +28,9 @@ var template = [
             rightName: "猛龙",
             rightBadge: "http://mat1.gtimg.com/sports/nba/logo/1602/28.png",
             rightUrl: "",
-            middleDesc: "让分",
+            middleDesc: "让分222",
             odds: [{
-                company: "bwin",
+                company: "bwin11",
                 init: {
                     desc: "初盘",
                     left: "1.91",
@@ -212,16 +212,17 @@ var template = [
             rightUrl: "",
             middleDesc: "",
             odds: [{
-                company: "bwin",
+                company: "bwin111",
                 init: {
                     desc: "初盘",
-                    left: "1.77",
-                    right: "2.10"
+                    // left: "1.77",
+                    'left|1-10.1-10': 1,
+                    'right|1-10.1-10': 1
                 },
                 recent: {
                     desc: "即时",
-                    left: "1.65",
-                    right: "2.30",
+                    'left|1-10.1-10': 1,
+                    'right|1-10.1-10': 1,
                     leftChange: "-1",
                     rightChange: "1"
                 }

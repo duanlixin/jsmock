@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-06 18:09:18
+ * @Last Modified time: 2016-04-11 14:33:36
  */
 
 'use strict';
@@ -26,6 +26,7 @@ var server = http.createServer(function(req, res) {
     if(key && key != '/favicon.ico' && key === '/mock/save') {
         var arg1 = url.parse(req.url, true).query;
         var realPath = path.dirname() + arg1.name;
+        console.log(realPath)
         fs.exists(realPath, function (exists) {
             // 判断文件是否存在，如果不存在，则创建文件，如果存在，则重新写入
             console.log(exists)

@@ -72,6 +72,8 @@
         .on('click', 'a.save', function(event) {
             if (!tplEditor.getValue()) return
             var name = $('.mock-adress').val();
+            var basenamePos = name.indexOf('.');
+
             $.ajax({
                 url: '/mock/save',
                 data: {
@@ -79,7 +81,12 @@
                     name: name
                 },
                 success: function(data) {
-                    location.pathname = '/' + data.id
+                    console.log( name.substr(0, basenamePos) + '?callback=_')
+                    setTimeout(function() {
+                        // location.pathname = name.substr(0, basenamePos) + '?callback=_'
+                        location.href = name.substr(0, basenamePos) + '?callback=_'
+                    }, 1000);
+                    // location.href = '/' + name.substr(0, basenamePos) + '?callback=_';
                 }
             })
         })

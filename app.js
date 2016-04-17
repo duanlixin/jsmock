@@ -1,8 +1,8 @@
 /*
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
- * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-11 16:32:14
+ * @Last Modified by:   dlx
+ * @Last Modified time: 2016-04-18 00:46:02
  */
 
 'use strict';
@@ -105,7 +105,7 @@ var server = http.createServer(function(request, response) {
                 lineReader.eachLine(configFile, function(line, last) {
                     newConfig.push(line);
                     newConfig.push('\n');
-                    if (line == 'var config = {') {
+                    if (!!configObj[fileName] && line == 'var config = {') {
                         newConfig.push("    '" + fileName + "': " + "'." + fileName + "',");
                         newConfig.push('\n');
                     }

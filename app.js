@@ -1,8 +1,8 @@
 /*
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
- * @Last Modified by:   dlx
- * @Last Modified time: 2016-04-18 00:46:02
+ * @Last Modified by:   lixinduan
+ * @Last Modified time: 2016-04-19 14:09:58
  */
 
 'use strict';
@@ -105,7 +105,8 @@ var server = http.createServer(function(request, response) {
                 lineReader.eachLine(configFile, function(line, last) {
                     newConfig.push(line);
                     newConfig.push('\n');
-                    if (!!configObj[fileName] && line == 'var config = {') {
+
+                    if (!configObj[fileName] && line == 'var config = {') {
                         newConfig.push("    '" + fileName + "': " + "'." + fileName + "',");
                         newConfig.push('\n');
                     }
@@ -129,7 +130,7 @@ var server = http.createServer(function(request, response) {
 
                 // 在配置文件中取出mock模板数据，并生成mock数据
                 templateData = mock.mock(require(configObj[key]));
-                console.log(key, configObj, require(configObj[key]))
+                // console.log(key, configObj, require(configObj[key]))
                     // 返回mock数据
                 response.write(callback + '(' + JSON.stringify(templateData) + ')');
                 response.end();

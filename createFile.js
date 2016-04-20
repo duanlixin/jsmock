@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-04-19 17:35:16
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-19 18:38:40
+ * @Last Modified time: 2016-04-20 10:58:01
  */
 
 'use strict';
@@ -18,9 +18,9 @@ var content = args[1];
 var filePath = path.dirname(fileName);
 
 // 按路径检查文件是否存在，若存在则写入内容，若不存在，则按照路径创建文件夹，最后在写入文件
-fs.exists(fileName, function(exist) {
-    // 如果文件不存在，先创建目录
-    if (exist === false) {
+// 先检查文件目录是否存在
+fs.exists(filePath, function (exists) {
+    if (exists === false) {
         fs.mkdirSync(filePath, function(e) {
             if (e) throw e;
         });

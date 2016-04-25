@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-25 10:41:02
+ * @Last Modified time: 2016-04-25 13:15:24
  */
 
 'use strict';
@@ -125,14 +125,13 @@ var server = http.createServer(function(request, response) {
 
                 response.write(key);
                 response.end();
-            } else if (key && key != '/favicon.ico' && callback) {
+            } else if (key && key != '/favicon.ico' && callback) { // 生成json文件
 
-                // 在配置文件中取出mock模板数据，并生成mock数据
-                templateData = mock.mock(require(configObj[key]));
-                // console.log(key, configObj, require(configObj[key]))
-                    // 返回mock数据
-                response.write(callback + '(' + JSON.stringify(templateData) + ')');
-                response.end();
+                require('./src/mocktest').init({
+                    key: key,
+                    response: response,
+                    callback: callback
+                });
             } else { // 404
                 require('./src/notfound').init({
                     response: response,

@@ -2,7 +2,7 @@
 * @Author: lixinduan
 * @Date:   2016-04-20 10:16:23
 * @Last Modified by:   lixinduan
-* @Last Modified time: 2016-04-25 17:22:47
+* @Last Modified time: 2016-04-25 20:56:40
 */
 
 'use strict';
@@ -25,11 +25,8 @@ for(var key in config) {
 var init = function init(opts) {
     var request = opts.request;
     var response = opts.response;
+    var callback = opts.callback;
 
-
-    var key = url.parse(request.url).pathname;
-    // 回调函数
-    var callback = url.parse(request.url, true).query.callback;
     // 取出get参数
     var query = url.parse(request.url, true).query;
     // 保存的文件名
@@ -76,7 +73,7 @@ var init = function init(opts) {
         newConfig.push('\n');
 
         if (!configObj[fileName] && line == 'var config = {') {
-            newConfig.push("    '" + fileName + "': " + "'." + fileName + "',");
+            newConfig.push("    '" + fileName + "': " + "'" + fileName + "',");
             newConfig.push('\n');
         }
 
@@ -93,7 +90,7 @@ var init = function init(opts) {
         }
     });
 
-    response.write(key);
+    response.write(url.parse(request.url).pathname);
     response.end();
 }
 

@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-19 14:09:58
+ * @Last Modified time: 2016-04-25 10:34:16
  */
 
 'use strict';
@@ -143,23 +143,11 @@ var server = http.createServer(function(request, response) {
                 response.write('This request URL ' + pathname + ' was not found on this server.');
                 response.end();
             }
-        } else {
-            fs.readFile(realPath, 'binary', function(err, file) {
-                if (err) {
-                    response.writeHead(500, {
-                        'Content-Type': 'text/plain'
-                    });
-
-                    response.end(err);
-                } else {
-
-                    var contentType = mime[ext] || 'text/plain';
-                    response.writeHead(200, { 'Content-Type': contentType });
-
-                    response.write(file, 'binary');
-
-                    response.end();
-                }
+        } else { // 启动网站
+            require('./src/site').init({
+                realPath: realPath,
+                response: response,
+                ext: ext
             });
         }
     });

@@ -81,10 +81,10 @@
                     name: name
                 },
                 success: function(data) {
-                    console.log( name.substr(0, basenamePos) + '?callback=_')
+                    console.log( '/data' + name.substr(0, basenamePos) + '?callback=_')
                     setTimeout(function() {
                         // location.pathname = name.substr(0, basenamePos) + '?callback=_'
-                        location.href = name.substr(0, basenamePos) + '?callback=_'
+                        location.href = '/data' + name.substr(0, basenamePos) + '?callback=_'
                     }, 1000);
                     // location.href = '/' + name.substr(0, basenamePos) + '?callback=_';
                 }

@@ -2,7 +2,7 @@
 * @Author: lixinduan
 * @Date:   2016-04-20 10:16:23
 * @Last Modified by:   lixinduan
-* @Last Modified time: 2016-04-25 13:28:20
+* @Last Modified time: 2016-04-25 17:19:03
 */
 
 'use strict';
@@ -25,7 +25,7 @@ var init = function init(opts) {
     var response = opts.response;
     var callback = opts.callback;
     // 在配置文件中取出mock模板数据，并生成mock数据
-    templateData = mock.mock(require('../data' +configObj[key]));
+    templateData = mock.mock(require('../' + key));
     // 返回mock数据
     response.write(callback + '(' + JSON.stringify(templateData) + ')');
     response.end();

@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-25 10:34:16
+ * @Last Modified time: 2016-04-25 10:41:02
  */
 
 'use strict';
@@ -13,7 +13,6 @@ var path = require('path');
 var querystring = require('querystring');
 var url = require('url');
 
-var mime = require('./mime').types;
 // 引入mock.js文件
 var mock = require('./mock');
 // 引入配置文件
@@ -134,14 +133,12 @@ var server = http.createServer(function(request, response) {
                     // 返回mock数据
                 response.write(callback + '(' + JSON.stringify(templateData) + ')');
                 response.end();
-            } else {
-
-                response.writeHead(404, {
-                    'Content-Type': 'text/plain'
+            } else { // 404
+                require('./src/notfound').init({
+                    response: response,
+                    pathname: pathname,
                 });
 
-                response.write('This request URL ' + pathname + ' was not found on this server.');
-                response.end();
             }
         } else { // 启动网站
             require('./src/site').init({

@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-25 20:47:31
+ * @Last Modified time: 2016-04-26 17:20:09
  */
 
 'use strict';
@@ -36,7 +36,15 @@ var server = http.createServer(function(request, response) {
                     request: request,
                     callback: callback
                 });
-            } else if (pathname && pathname != '/favicon.ico' && callback) { // 返回json文件
+            } 
+            else if (pathname && pathname != '/favicon.ico' && pathname === '/mock/delete') { // 保存配置文件
+                require('./src/delete').init({
+                    response: response,
+                    request: request,
+                    callback: callback
+                });
+            } 
+            else if (pathname && pathname != '/favicon.ico' && callback) { // 返回json文件
                 require('./src/mock').init({
                     pathname: pathname,
                     response: response,

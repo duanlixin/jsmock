@@ -2,7 +2,7 @@
 * @Author: lixinduan
 * @Date:   2016-04-20 10:59:10
 * @Last Modified by:   lixinduan
-* @Last Modified time: 2016-04-20 11:00:34
+* @Last Modified time: 2016-04-26 17:42:00
 */
 
 'use strict';
@@ -17,8 +17,16 @@ var filePath = path.dirname(fileName);
 
 var exec = require('child_process').exec,child;
 
-child = exec('rm -rf ' + filePath,function(err,out) { 
+var init = function(opts) {
+    var dir = './data' + opts.dir;
 
-    console.log(out); err && console.log(err); 
+    child = exec('rm -rf ' + dir, function(err,out) { 
 
-});
+        console.log(out); err && console.log(err); 
+
+    });
+}
+
+
+
+exports.init = init;

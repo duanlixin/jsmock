@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-04-22 11:34:58
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-22 13:23:45
+ * @Last Modified time: 2016-04-26 19:19:10
  */
 
 'use strict';
@@ -33,3 +33,25 @@ function walk(path) {
 
 walk(fileName);
 console.log(fileList);
+
+
+
+var init = function (opts) {
+    var dirList = fs.readdirSync(opts.fileName);
+
+    dirList.forEach(function(item) {
+        if (fs.statSync(path + '/' + item).isFile()) {
+            fileList.push(path + '/' + item);
+        }
+    });
+
+    dirList.forEach(function(item) {
+        if (fs.statSync(path + '/' + item).isDirectory()) {
+            walk(path + '/' + item);
+        }
+    });
+
+    return fileList;
+}
+
+exports.init = init;

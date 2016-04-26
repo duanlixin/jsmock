@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-26 17:20:09
+ * @Last Modified time: 2016-04-26 18:27:19
  */
 
 'use strict';
@@ -32,6 +32,13 @@ var server = http.createServer(function(request, response) {
             var callback = url.parse(request.url, true).query.callback;
             if (pathname && pathname != '/favicon.ico' && pathname === '/mock/save') { // 保存配置文件
                 require('./src/save').init({
+                    response: response,
+                    request: request,
+                    callback: callback
+                });
+            } 
+            else if (pathname && pathname != '/favicon.ico' && pathname === '/mock/list') { // 保存配置文件
+                require('./src/list').init({
                     response: response,
                     request: request,
                     callback: callback

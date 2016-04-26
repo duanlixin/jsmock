@@ -2,7 +2,7 @@
 * @Author: lixinduan
 * @Date:   2016-04-20 10:16:23
 * @Last Modified by:   lixinduan
-* @Last Modified time: 2016-04-26 16:27:02
+* @Last Modified time: 2016-04-26 16:59:25
 */
 
 'use strict';
@@ -59,26 +59,26 @@ var init = function init(opts) {
 
     });
 
-    var configFile =  './config.js';
+    var configFile =  'data/config.js';
     var basenamePos = name.indexOf('.');
     var newConfig = [];
     var fileName = name.substr(0, basenamePos);
 
-    configObj[fileName] = fileName;
-    // console.log(configObj, fileName)
+    // configObj[fileName] = fileName;
     // 逐行读文件，读到config后，在后面加一行，最后写会文件
     lineReader.eachLine(configFile, function(line, last) {
         newConfig.push(line);
         newConfig.push('\n');
 
         if (!configObj[fileName] && line == 'var config = {') {
+            configObj[fileName] = fileName;
             newConfig.push("    '" + fileName + "': " + "'" + fileName + "',");
             newConfig.push('\n');
         }
 
         if (last) {
             require('../utils/createFile').createFile({
-                fileName: configFile,
+                fileName: 'data/config.js',
                 content: newConfig.join('')
             });
 

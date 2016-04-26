@@ -2,7 +2,7 @@
 * @Author: lixinduan
 * @Date:   2016-04-20 10:16:23
 * @Last Modified by:   lixinduan
-* @Last Modified time: 2016-04-25 20:56:40
+* @Last Modified time: 2016-04-26 16:27:02
 */
 
 'use strict';
@@ -34,7 +34,7 @@ var init = function init(opts) {
     // 保存的模板内容
     var tpl = query.tpl;
     // 拼接实际路径
-    var filePath = './data' + name;
+    var filePath = '../data' + name;
 
     var exampleFile = './example.js';
 
@@ -48,13 +48,12 @@ var init = function init(opts) {
             newJsonFile.push('\n');
         }
         if (last) {
-            fs.open(filePath, 'w', function(e, fd) {
-                if (e) throw e;
-                fs.write(fd, newJsonFile.join(''), 0, 'utf8', function(e) {
-                    if (e) throw e;
-                    fs.closeSync(fd);
-                })
+            // 生成模拟数据
+            require('../utils/createFile').createFile({
+                fileName: 'data'+ name,
+                content: newJsonFile.join('')
             });
+
             return false; // stop reading
         }
 
@@ -65,7 +64,7 @@ var init = function init(opts) {
     var newConfig = [];
     var fileName = name.substr(0, basenamePos);
 
-    // configObj[fileName] = fileName;
+    configObj[fileName] = fileName;
     // console.log(configObj, fileName)
     // 逐行读文件，读到config后，在后面加一行，最后写会文件
     lineReader.eachLine(configFile, function(line, last) {
@@ -77,15 +76,12 @@ var init = function init(opts) {
             newConfig.push('\n');
         }
 
-
         if (last) {
-            fs.open(configFile, 'w', function(e, fd) {
-                if (e) throw e;
-                fs.write(fd, newConfig.join(''), 0, 'utf8', function(e) {
-                    if (e) throw e;
-                    fs.closeSync(fd);
-                })
+            require('../utils/createFile').createFile({
+                fileName: configFile,
+                content: newConfig.join('')
             });
+
             return false; // stop reading
         }
     });

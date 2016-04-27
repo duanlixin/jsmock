@@ -2,7 +2,7 @@
 * @Author: lixinduan
 * @Date:   2016-04-20 10:16:23
 * @Last Modified by:   lixinduan
-* @Last Modified time: 2016-04-26 16:59:25
+* @Last Modified time: 2016-04-27 15:06:58
 */
 
 'use strict';
@@ -36,6 +36,8 @@ var init = function init(opts) {
     // 拼接实际路径
     var filePath = '../data' + name;
 
+    var type = query.type;
+
     var exampleFile = './example.js';
 
     var newJsonFile = [];
@@ -64,6 +66,8 @@ var init = function init(opts) {
     var newConfig = [];
     var fileName = name.substr(0, basenamePos);
 
+
+
     // configObj[fileName] = fileName;
     // 逐行读文件，读到config后，在后面加一行，最后写会文件
     lineReader.eachLine(configFile, function(line, last) {
@@ -72,7 +76,7 @@ var init = function init(opts) {
 
         if (!configObj[fileName] && line == 'var config = {') {
             configObj[fileName] = fileName;
-            newConfig.push("    '" + fileName + "': " + "'" + fileName + "',");
+            newConfig.push("    '" + fileName + "': " + "'" + type + "',");
             newConfig.push('\n');
         }
 

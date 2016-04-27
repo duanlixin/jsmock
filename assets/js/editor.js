@@ -70,15 +70,18 @@
     // Save, Tidy
     $('div.header')
         .on('click', 'a.save', function(event) {
-            if (!tplEditor.getValue()) return
+            console.log(!tplEditor.getValue())
+            if (!tplEditor.getValue()) return;
             var name = $('.mock-adress').val();
             var basenamePos = name.indexOf('.');
+            var type = $('.mock-type').val();
 
             $.ajax({
                 url: '/mock/save',
                 data: {
                     tpl: tplEditor.getValue(),
-                    name: name
+                    name: name,
+                    type: type
                 },
                 success: function(data) {
                     console.log( '/data' + name.substr(0, basenamePos) + '?callback=_')

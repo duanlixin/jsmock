@@ -2,7 +2,7 @@
 * @Author: lixinduan
 * @Date:   2016-04-26 18:11:38
 * @Last Modified by:   lixinduan
-* @Last Modified time: 2016-04-27 10:14:20
+* @Last Modified time: 2016-05-16 16:16:53
 */
 
 'use strict';
@@ -34,11 +34,7 @@ var init = function init(opts) {
 
     var listFile = [];
 
-    if(list) {
-       listFile = require('../utils/listFile').init({
-            fileName: list
-        });
-    }
+    listFile = require('../utils/listFile').init('./data' + list);
 
     response.write(listFile.join('\r'));
     response.end();

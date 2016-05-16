@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-03-31 10:13:03
  * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-26 18:27:19
+ * @Last Modified time: 2016-05-16 20:17:46
  */
 
 'use strict';
@@ -21,7 +21,7 @@ var port = 8888;
 var server = http.createServer(function(request, response) {
 
     var pathname = url.parse(request.url).pathname;
-    var realPath = 'assets' + pathname;
+    var realPath = 'pages' + pathname;
     var ext = path.extname(realPath);
     ext = ext ? ext.slice(1) : 'unknown';
 
@@ -37,14 +37,14 @@ var server = http.createServer(function(request, response) {
                     callback: callback
                 });
             } 
-            else if (pathname && pathname != '/favicon.ico' && pathname === '/mock/list') { // 保存配置文件
+            else if (pathname && pathname != '/favicon.ico' && pathname === '/mock/list') { // 列出所有文件
                 require('./src/list').init({
                     response: response,
                     request: request,
                     callback: callback
                 });
             } 
-            else if (pathname && pathname != '/favicon.ico' && pathname === '/mock/delete') { // 保存配置文件
+            else if (pathname && pathname != '/favicon.ico' && pathname === '/mock/delete') { // 删除指定文件或文件夹
                 require('./src/delete').init({
                     response: response,
                     request: request,

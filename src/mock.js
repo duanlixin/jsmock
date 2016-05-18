@@ -1,8 +1,8 @@
 /*
  * @Author: lixinduan
  * @Date:   2016-04-20 10:16:23
- * @Last Modified by:   lixinduan
- * @Last Modified time: 2016-04-25 20:43:17
+ * @Last Modified by:   dlx
+ * @Last Modified time: 2016-05-18 23:39:20
  */
 
 'use strict';
@@ -19,8 +19,15 @@ var init = function init(opts) {
     var response = opts.response;
     var callback = opts.callback;
     // 在配置文件中取出mock模板数据，并生成mock数据
-    templateData = mock.mock(require('../' + pathname));
+    var path = '../jsmock' + pathname + '.js';
+
+    fs.readFile(path, 'utf8', (err, data) => {
+        if (err) throw err;
+        // console.log(JSON.parse(data));
+        templateData = JSON.parse(data);
+    });
     // 返回mock数据
+        
     response.write(callback + '(' + JSON.stringify(templateData) + ')');
     response.end();
 };

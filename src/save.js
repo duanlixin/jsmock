@@ -1,8 +1,8 @@
 /*
 * @Author: lixinduan
 * @Date:   2016-04-20 10:16:23
-* @Last Modified by:   lixinduan
-* @Last Modified time: 2016-05-16 20:18:54
+* @Last Modified by:   dlx
+* @Last Modified time: 2016-05-18 23:14:53
 */
 
 'use strict';
@@ -26,7 +26,7 @@ var init = function init(opts) {
     // 生成模拟数据
     require('../utils/createFile').createFile({
         fileName: 'data'+ name,
-        content: 'module.exports = ' + query.tpl + ';'
+        content:  query.tpl
     });
 
     response.write(url.parse(request.url).pathname);

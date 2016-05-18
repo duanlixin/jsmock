@@ -116,24 +116,21 @@
     // Hook up the submit button to log to the console
     document.getElementById('submit').addEventListener('click', function() {
         // Get the value from the editor
-        console.log(typeof editor.getValue());
         var name = $('#file-name').val();
         var basenamePos = name.indexOf('.');
         // return ;
         $.ajax({
-            url: 'http://10.22.74.184:8888/mock/save',
+            url: 'http://127.0.0.1:8888/mock/save',
             data: {
                 tpl: JSON.stringify(editor.getValue()),
                 name: name,
                 type: 'post'
             },
             success: function(data) {
-                console.log('/data' + name.substr(0, basenamePos) + '?callback=_')
                 setTimeout(function() {
                     // location.pathname = name.substr(0, basenamePos) + '?callback=_'
                     location.href = '/data' + name.substr(0, basenamePos) + '?callback=_'
-                }, 1000);
-                location.href = '/' + name.substr(0, basenamePos) + '?callback=_';
+                }, 0);
             }
         });
     });

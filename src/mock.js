@@ -2,14 +2,12 @@
  * @Author: lixinduan
  * @Date:   2016-04-20 10:16:23
  * @Last Modified by:   dlx
- * @Last Modified time: 2016-05-18 23:39:20
+ * @Last Modified time: 2016-05-25 22:35:12
  */
 
 'use strict';
 
 var fs = require('fs');
-
-var templateData = {};
 
 // 引入mock.js文件
 var mock = require('../mock');
@@ -23,13 +21,12 @@ var init = function init(opts) {
 
     fs.readFile(path, 'utf8', (err, data) => {
         if (err) throw err;
-        // console.log(JSON.parse(data));
-        templateData = JSON.parse(data);
+        console.log(data);
+        response.write(callback + '(' + data + ')');
+        response.end();
     });
     // 返回mock数据
         
-    response.write(callback + '(' + JSON.stringify(templateData) + ')');
-    response.end();
 };
 
 exports.init = init;

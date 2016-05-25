@@ -11,7 +11,7 @@
 <body>
     <h1>Basic JSON Editor Example<a href="http://127.0.0.1:8888/mock/list">list</a></h1>
     <div id="editor_holder"></div>
-    <input id="file-name" type="text" value="/html/dddd.js">
+    <input id="file-name" type="text" value="/html/dddd">
     <button id='submit'>Submit (console.log)</button>
     <script>
     // Initialize the editor with a JSON schema
@@ -129,7 +129,8 @@
             success: function(data) {
                 setTimeout(function() {
                     // location.pathname = name.substr(0, basenamePos) + '?callback=_'
-                    location.href = '/data' + name.substr(0, basenamePos) + '?callback=_'
+                    console.log('/data' + name + '?callback=_')
+                    location.href = '/data' + name + '?callback=_'
                 }, 0);
             }
         });

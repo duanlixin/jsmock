@@ -2,7 +2,7 @@
 * @Author: lixinduan
 * @Date:   2016-04-26 18:11:38
 * @Last Modified by:   dlx
-* @Last Modified time: 2016-05-25 23:28:08
+* @Last Modified time: 2016-05-25 23:52:02
 */
 
 'use strict';
@@ -25,7 +25,12 @@ var init = function init(opts) {
 
     listFile = require('../utils/listFile').init('./data' + list);
 
-    response.write(listFile.join('\r'));
+    var sss = listFile.map(function (item) {
+        // body...
+        return '<a target="_blank" href="' + item.substr(1) + '?callback=_' + '">' + item.substr(1) + '?callback=_'+ '</a><br>';
+    });
+
+    response.write(sss.join('\r'));
     response.end();
 }
 

@@ -2,7 +2,7 @@
  * @Author: lixinduan
  * @Date:   2016-04-20 10:16:23
  * @Last Modified by:   dlx
- * @Last Modified time: 2016-05-25 22:35:12
+ * @Last Modified time: 2016-05-25 23:49:35
  */
 
 'use strict';
@@ -17,7 +17,7 @@ var init = function init(opts) {
     var response = opts.response;
     var callback = opts.callback;
     // 在配置文件中取出mock模板数据，并生成mock数据
-    var path = '../jsmock' + pathname + '.js';
+    var path = '../jsmock' + pathname;
 
     fs.readFile(path, 'utf8', (err, data) => {
         if (err) throw err;
@@ -25,8 +25,6 @@ var init = function init(opts) {
         response.write(callback + '(' + data + ')');
         response.end();
     });
-    // 返回mock数据
-        
 };
 
 exports.init = init;

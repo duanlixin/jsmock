@@ -1,8 +1,8 @@
 /*
 * @Author: lixinduan
 * @Date:   2016-04-26 18:11:38
-* @Last Modified by:   dlx
-* @Last Modified time: 2016-05-25 23:52:02
+* @Last Modified by:   lixinduan
+* @Last Modified time: 2016-05-26 11:56:58
 */
 
 'use strict';
@@ -27,7 +27,7 @@ var init = function init(opts) {
 
     var sss = listFile.map(function (item) {
         // body...
-        return '<a target="_blank" href="' + item.substr(1) + '?callback=_' + '">' + item.substr(1) + '?callback=_'+ '</a><br>';
+        return '<a target="_blank" href="http://127.0.0.1:8888/basic.html?file=' + item.substr(1) + '">' + '编辑'+ '</a>&nbsp;&nbsp;&nbsp;&nbsp;' + '<a target="_blank" href="' + item.substr(1) + '?callback=_' + '">' + item.substr(1) + '?callback=_'+ '</a>&nbsp;&nbsp;&nbsp;&nbsp;'+ '<br>';
     });
 
     response.write(sss.join('\r'));

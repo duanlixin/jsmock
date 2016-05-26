@@ -14,6 +14,35 @@
     <input id="file-name" type="text" value="/html/dddd">
     <button id='submit'>Submit (console.log)</button>
     <script>
+
+
+    /**
+     * 获取地址栏中的参数
+     * @returns {{}}
+     */
+   function getParams () {
+        var queryString = window.location.search.split('?')[1];
+        var result = {};
+        if (queryString) {
+            var queryList = queryString.split('&');
+            for (var i = 0; i < queryList.length; i++) {
+                var keyValue = queryList[i].split('=');
+                result[keyValue[0]] = decodeURIComponent(keyValue[1]);
+            }
+        }
+        if (result.mid) {
+            try {
+                result.mid = this.decodeURIComponentUtil(result.mid);
+            } catch (e) {}
+        }
+        return result;
+    }
+
+    // 1.取url参数，找文件id，类似// /html/ddd
+    // 2.给后端发个请求，获取文件内容
+    // 3.editor.setValue();
+
+
     // Initialize the editor with a JSON schema
     var editor = new JSONEditor(document.getElementById('editor_holder'), {
         schema: {
@@ -113,6 +142,23 @@
         }
     });
 
+    var fileName = getParams().file;
+
+    if(fileName) {
+        $.ajax({
+            url: 'http://127.0.0.1:8888' + fileName + '?callback=_',
+            success: function(data) {
+                setTimeout(function() {
+
+                    console.log(data.replace('_(', '').replace(')',''))
+                    editor.setValue(JSON.parse(data.replace('_(', '').replace(')','')));
+                }, 0);
+            }
+        });
+    }
+
+
+
     // Hook up the submit button to log to the console
     document.getElementById('submit').addEventListener('click', function() {
         // Get the value from the editor
@@ -135,6 +181,7 @@
             }
         });
     });
+
     </script>
 </body>
 
